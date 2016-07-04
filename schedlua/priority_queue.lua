@@ -65,18 +65,23 @@ function Queue:dequeue(value)
 		return nil, "list is empty"
 	end
 
-	local highest_priority = self.first
+	local highest_priority_index = self.first
+	local highest_priority = self[first].priority
 
 	for cursor=0, self.last, 1 do
 		if self[cursor] then
-			print("QUEUE PRIORITY: "..self[cursor].priority)
+			if self[cursor].priority < highest_priority then
+				highest_priority_index = cursor
+				highest_priority = self[cursor].priority
+			end
+			--print("QUEUE PRIORITY: "..self[cursor].priority)
 		end
 	end
 	
 	-- The old code
-	local value = self[highest_priority]
-	self[highest_priority] = nil        -- to allow garbage collection
-	self.first = first + 1
+	local value = self[highest_priority_index]
+	self[highest_priority_index] = nil        -- to allow garbage collection
+	self.first = highest_priority_index + 1
 
 	return value	
 end
