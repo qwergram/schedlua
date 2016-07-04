@@ -12,6 +12,7 @@ local Functor = require("schedlua.functor")
 local Kernel = {
 	ContinueRunning = true;
 	TaskID = 0;
+	priority = 1;
 	Scheduler = Scheduler();
 	TasksSuspendedForSignal = {};
 }
