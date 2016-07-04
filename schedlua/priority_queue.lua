@@ -42,11 +42,11 @@ end
 function Queue:enqueue(value)
 	--self.MyList:PushRight(value)
 	value.priority = value.priority or "PRIORITY NOT SET"
-	print("INSIDE OF PRIORITY QUEUE: PRIORITY: "..value.priority)
+	--print("INSIDE OF PRIORITY QUEUE: PRIORITY: "..value.priority)
 	local last = self.last + 1
 	self.last = last
 	self[last] = value
-	print(self.last)
+	--print(self.last)
 	return value
 end
 
@@ -63,6 +63,13 @@ function Queue:dequeue(value)
 
 	if first > self.last then
 		return nil, "list is empty"
+	end
+
+	print("== INSIDE DEQUEUE ==")
+	for cursor=0, self.first - 1, 1 do
+		if self[cursor] then
+			print("QUEUE PRIORITY: "..self[cursor].priority)
+		end
 	end
 	
 	local value = self[first]
