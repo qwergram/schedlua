@@ -46,6 +46,7 @@ function Queue:enqueue(value)
 	local last = self.last + 1
 	self.last = last
 	self[last] = value
+	print("WHAT IS THIS? "..self.last..self[last])
 
 	return value
 end
