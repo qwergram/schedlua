@@ -12,7 +12,6 @@ local Functor = require("schedlua.functor")
 local Kernel = {
 	ContinueRunning = true;
 	TaskID = 0;
-	priority = 1;
 	Scheduler = Scheduler();
 	TasksSuspendedForSignal = {};
 }
@@ -48,7 +47,7 @@ end
 function Kernel.spawn(self, func, ...)
 	local task = Task(func, ...)
 	task.TaskID = self:getNewTaskID();
-	task.priority = 1;
+	-- task.priority = 1;
 	self.Scheduler:scheduleTask(task, {...});
 	
 	return task;
