@@ -98,6 +98,7 @@ end
 function Scheduler.step(self)
 	-- Now check the regular fibers
 	local task = self.TasksReadyToRun:dequeue()
+	task.priority = task.priority or "NOT ASSIGNED"
 	print("priority "..task.priority)
 
 	-- If no fiber in ready queue, then just return
