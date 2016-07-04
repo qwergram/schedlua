@@ -3,9 +3,6 @@ package.path = package.path..";../?.lua"
 
 local Kernel = require("schedlua.kernel")()
 
-
-
-
 local function numbers(ending)
 	local idx = 0;
 	local function fred()
