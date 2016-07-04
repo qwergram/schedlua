@@ -1,7 +1,5 @@
 --[[
-	Priority Queue
-	Initially copied from https://github.com/qwergram/schedlua/blob/msft-week-0/schedlua/queue.lua
-	Forked from https://github.com/Wiladams/schedlua.git
+	Queue
 --]]
 local Queue = {}
 setmetatable(Queue, {
