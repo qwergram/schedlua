@@ -47,7 +47,6 @@ function Queue:enqueue(value)
 	self.last = last
 	self[last] = value
 	print(self.last)
-
 	return value
 end
 
