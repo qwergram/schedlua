@@ -1,7 +1,7 @@
 
 local ffi = require("ffi");
 
-local Queue = require("schedlua.queue")
+local Queue = require("schedlua.priority_queue")
 local Task = require("schedlua.task");
 
 
