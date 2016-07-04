@@ -2,7 +2,7 @@
 -- kernel is a singleton, so return
 -- single instance if we've already been
 -- through this code
---print("== KERNEL INCLUDED ==")
+print("== KERNEL INCLUDED ==")
 
 local Scheduler = require("schedlua.scheduler")
 local Task = require("schedlua.task")
