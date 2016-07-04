@@ -47,6 +47,7 @@ end
 function Kernel.spawn(self, func, priority, ...)
 	local task = Task(func, ...)
 	task.TaskID = self:getNewTaskID();
+	task.priority = priority;
 	self.Scheduler:scheduleTask(task, {...});
 	
 	return task;
