@@ -41,7 +41,7 @@ end
 
 function Queue:enqueue(value)
 	--self.MyList:PushRight(value)
-	value.priority = value.priority or "PRIORITY NOT SET"
+	value.priority = value.priority or 100
 	--print("INSIDE OF PRIORITY QUEUE: PRIORITY: "..value.priority)
 	local last = self.last + 1
 	self.last = last
