@@ -44,7 +44,7 @@ function Kernel.getCurrentTask(self)
 	return self.Scheduler:getCurrentTask();
 end
 
-function Kernel.spawn(self, func, priority, ...)
+function Kernel.spawn(self, priority, func, ...)
 	priority = priority or 1
 	local task = Task(func, ...)
 	task.TaskID = self:getNewTaskID();
