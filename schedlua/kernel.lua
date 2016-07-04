@@ -45,7 +45,6 @@ function Kernel.getCurrentTask(self)
 end
 
 function Kernel.spawn(self, priority, func, ...)
-	priority = priority or 1
 	local task = Task(func, ...)
 	task.TaskID = self:getNewTaskID();
 	task.priority = priority;
