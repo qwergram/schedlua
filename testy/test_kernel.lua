@@ -35,10 +35,10 @@ local function counter(name, nCount)
 end
 
 local function main()
-	local t0 = spawn(counter, "counter1", 5)
-	local t1 = spawn(task1)
-	local t2 = spawn(task2)
-	local t3 = spawn(counter, "counter2", 7)
+	local t0 = Kernel:spawn(1, counter, "counter1", 5)
+	local t1 = Kernel:spawn(1, task1)
+	local t2 = Kernel:spawn(1, task2)
+	local t3 = Kernel:spawn(1, counter, "counter2", 7)
 end
 
 run(main)
