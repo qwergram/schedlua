@@ -25,11 +25,14 @@ struct timespec {
   long   tv_nsec;
 };
 
+
+-- This almost looks like a .h file
 int clock_getres(clockid_t clk_id, struct timespec *res);
 int clock_gettime(clockid_t clk_id, struct timespec *tp);
 int clock_settime(clockid_t clk_id, const struct timespec *tp);
 int clock_nanosleep(clockid_t clock_id, int flags, const struct timespec *request, struct timespec *remain);
 
+-- FFI must do dynamic typing things.
 static const int CLOCK_REALTIME			= 0;
 static const int CLOCK_MONOTONIC			= 1;
 static const int CLOCK_PROCESS_CPUTIME_ID	= 2;
@@ -44,10 +47,11 @@ static const int CLOCK_SGI_CYCLE			= 10;	// Hardware specific
 static const int CLOCK_TAI					= 11;
 
 ]]
+-- Oh what the heck? "//" is a c comment. This is c. Dyanmic typing?
 
-
+-- a clock of some sort?
 local timespec = ffi.typeof("struct timespec")
-local timespec_mt = {
+local timespec_mt = { -- This must be an object with methods
 	__add = function(lhs, rhs)
 		local newspec = timespec(lhs.tv_sec+rhs.tv_sec, lhs.tv_nsec+rhs.tv_nsec);
 		return newspec;
@@ -58,11 +62,11 @@ local timespec_mt = {
 		return newspec;
 	end;	
 
-	__tostring = function(self)
+	__tostring = function(self) -- I was under the impression that a space was required here. function (self) as opposed to funciton(self)
 		return string.format("%d.%d", tonumber(self.tv_sec), tonumber(self.tv_nsec));
 	end;
 
-	__index = {
+	__index = { -- classes inside of classes?
 		gettime = function(self, clockid)
 			clockid = clockid or ffi.C.CLOCK_REALTIME;
 			local res = ffi.C.clock_gettime(clockid, self)
@@ -91,8 +95,7 @@ local timespec_mt = {
 
 	};
 }
-ffi.metatype(timespec, timespec_mt)
-exports.timespec = timespec;
+ffi.metatype(timespec, timespec_mt) exports.timespec = timespec;
 
 function exports.sleep(seconds, clockid, flags)
 	clockid = clockid or ffi.C.CLOCK_REALTIME;
@@ -103,13 +106,12 @@ function exports.sleep(seconds, clockid, flags)
 	request:setFromSeconds(seconds);
 	local res = ffi.C.clock_nanosleep(clockid, flags, request, remain);
 
-	return remain:seconds();
-end
+	return remain:seconds(); end
 
 
 
 exports.C = C;
-
+-- phpish for having all these dumb functions built in
 setmetatable(exports, {
 	__call = function(self)
 		for k,v in pairs(exports) do

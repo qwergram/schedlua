@@ -1,9 +1,13 @@
+ -- This must be equivelent to import ffi
+ -- ffi is like ctypes in python
 local ffi = require("ffi")
+ -- bit is the bit operations that lua can do
 local bit = require("bit")
+ -- local means that variables aren't carried from file to file upon requires
 
-
-
+ 
 local system = require("schedlua.linux")
+ --
 
 local Clock = {}
 setmetatable(Clock, {
