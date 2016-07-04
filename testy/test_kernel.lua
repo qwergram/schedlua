@@ -36,9 +36,9 @@ end
 
 local function main()
 	local t0 = Kernel:spawn(counter, 1, "counter1", 5)
-	local t1 = Kernel:spawn(task1, 1)
-	local t2 = Kernel:spawn(task2, 1)
-	local t3 = Kernel:spawn(counter, 1, "counter2", 7)
+	local t1 = Kernel:spawn(task1, 2)
+	local t2 = Kernel:spawn(task2, 3)
+	local t3 = Kernel:spawn(counter, 4, "counter2", 7)
 end
 
 run(main)
