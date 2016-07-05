@@ -3,9 +3,6 @@ package.path = package.path..";../?.lua"
 
 local Kernel = require("schedlua.kernel")()
 
-
-
-
 local function numbers(ending)
 	local idx = 0;
 	local function fred()
@@ -38,10 +35,10 @@ local function counter(name, nCount)
 end
 
 local function main()
-	local t0 = spawn(counter, "counter1", 5)
-	local t1 = spawn(task1)
-	local t2 = spawn(task2)
-	local t3 = spawn(counter, "counter2", 7)
+	local t0 = Kernel:spawn(counter, 2, "counter1", 5)
+	local t1 = Kernel:spawn(task1, 1)
+	local t2 = Kernel:spawn(task2, 2)
+	local t3 = Kernel:spawn(counter, 1, "counter2", 7)
 end
 
 run(main)

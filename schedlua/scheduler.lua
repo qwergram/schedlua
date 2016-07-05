@@ -1,7 +1,7 @@
 
 local ffi = require("ffi");
 
-local Queue = require("schedlua.queue")
+local Queue = require("schedlua.priority_queue")
 local Task = require("schedlua.task");
 
 
@@ -71,6 +71,7 @@ function Scheduler.scheduleTask(self, task, params)
 	task:setParams(params);
 	self.TasksReadyToRun:enqueue(task);	
 	task.state = "readytorun"
+	-- task.priority = 1
 
 	return task;
 end
@@ -97,6 +98,8 @@ end
 function Scheduler.step(self)
 	-- Now check the regular fibers
 	local task = self.TasksReadyToRun:dequeue()
+	task.priority = task.priority or "NOT ASSIGNED"
+	print("priority "..task.priority)
 
 	-- If no fiber in ready queue, then just return
 	if task == nil then
